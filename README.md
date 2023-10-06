@@ -14,5 +14,7 @@ taking wheel position and pressure data along with IMU data to analyze the C.O.B
 
 - [x] ADC code for data aquistion
 - [x] Read/Write speed test and data throughput estimation
-- [ ] serial communication for ADC (OR through USB??)
+- [X] serial communication for ADC (OR through USB??)
 - [x] data recording scheme (cvs? txt?)
+- [ ] Parse IMU data (Inertial Sense or LORD)
+

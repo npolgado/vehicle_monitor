@@ -8,6 +8,9 @@ Values from Ride Height
 
 */ 
 
+// TODO: read these over I2C
+int start_bit = 0xFFFF;
+int rate = 10;
 
 void setup() {
   // Initialize serial communication at a baud rate of 9600
@@ -22,15 +25,12 @@ void loop() {
   int analogValueA3 = analogRead(A3);
 
   // Print the values over the serial port
-  Serial.print("\n");
-  Serial.print(analogValueA0);
-  Serial.print("\n");
-  Serial.print(analogValueA1);
-  Serial.print("\n");
-  Serial.print(analogValueA2);
-  Serial.print("\n");
+  Serial.println(start_bit);
+  Serial.println(analogValueA0);
+  Serial.println(analogValueA1);
+  Serial.println(analogValueA2);
   Serial.println(analogValueA3);
 
   // Delay for a short period (you can adjust this value)
-  delay(10);
+  delay(rate);
 }
