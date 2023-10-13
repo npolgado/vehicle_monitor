@@ -23,9 +23,9 @@ taking wheel position and pressure data along with IMU data to analyze the C.O.B
 - [x] serial communication for ADC (OR through USB??)
 - [x] data recording scheme (cvs? txt?)
 - [x] Parse IMU data (Inertial Sense or LORD)
-- [ ] benchmark data throughput
-- [ ] ROS workspace coding
-- [ ] vehicle_monitor bringup
+- [x] benchmark data throughput
+- [x] ROS bringup launch file
+- [ ] Arduino Ros Driver
 - [ ] easy to use UI / HMI (display??)
 - [ ] wiring diagram
 - [ ] data analysis code work
