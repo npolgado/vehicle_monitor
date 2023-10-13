@@ -15,6 +15,5 @@ if __name__ == "__main__":
 
    while not rospy.is_shutdown():
       data = aquire_date()
-      rospy.loginfo(data)
       pub.publish(data)
       rate.sleep()
