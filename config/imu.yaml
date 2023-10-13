@@ -1,4 +1,3 @@
-
 port: "/dev/ttyACM0"
 
 diagnostics: True
@@ -12,10 +11,9 @@ use_ros_time: True
 imu_data_rate: 100
 imu_raw_data_rate: -1
 imu_mag_data_rate: -1
-imu_gpu_corr_data_rate: -1
+imu_gpu_corr_data_rate: 0
 imu_overrange_statue_data_rate: -1
+
 
 filter_data_rate: 10
 filter_auto_init: True
-
-

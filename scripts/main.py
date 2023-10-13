@@ -5,23 +5,6 @@ import serial
 from datetime import datetime
 import yaml
 
-# Load YAML data from the file
-with open('config.yaml', 'r') as yaml_file:
-    config = yaml.safe_load(yaml_file)
-
-# Access variables from the loaded data
-print(f"Script Version: {config['script_version']}")
-
-# SCRIPT PARAMS
-DATE = datetime.now().strftime("%Y_%m_%d")
-SESSION_FILE_NAME = os.path.join(config["storage_path"], f"data_log_{DATE}.csv")
-
-# Open serial ports
-imu_serial = serial.Serial(
-    config["imu"]["port"],
-    config["imu"]["baudrate"]
-)
-
 arduino_serial = serial.Serial(
     config["arduino"]["port"], 
     config["arduino"]["baudrate"]
@@ -42,11 +25,6 @@ def read_arduino():
         if float(time.monotonic() - t_s) > config["arduino"]["timeout"]: pass
 
     return data
-
-## TODO
-def read_imu():
-    raw = imu_serial.readline().decode().strip()
-    return raw
 
 if __name__ == "__main__":
     hz = float(1/config["period"])
