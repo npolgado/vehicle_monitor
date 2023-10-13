@@ -1,0 +1,21 @@
+
+port: "/dev/ttyACM0"
+
+diagnostics: True
+
+reconnect_attempts: 5
+
+use_device_timestamp: False
+use_ros_time: True
+
+
+imu_data_rate: 100
+imu_raw_data_rate: -1
+imu_mag_data_rate: -1
+imu_gpu_corr_data_rate: -1
+imu_overrange_statue_data_rate: -1
+
+filter_data_rate: 10
+filter_auto_init: True
+
+
