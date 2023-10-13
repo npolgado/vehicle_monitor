@@ -1,1 +1,6 @@
-<node pkg="vehicle_monitor" name="main.py" type="main.py" output="screen"></node>
+
+<launch>
+
+   <node pkg="vehicle_monitor" name="main.py" type="main.py" output="screen"/>
+
+</launch
