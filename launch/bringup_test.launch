@@ -32,7 +32,7 @@
   <!-- ****************************************************************** -->
   <!-- Rideheight sensor node -->
   <!-- ****************************************************************** -->
-  <node name="rideheight" pkg="vehicle_monitor" type="main.py" output="screen"/>
+  <node name="rideheight" pkg="vehicle_monitor" type="test.py" output="screen"/>
 
 
 </launch>

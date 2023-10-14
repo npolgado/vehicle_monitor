@@ -15,5 +15,5 @@ imu_gpu_corr_data_rate: 0
 imu_overrange_statue_data_rate: -1
 
 
-filter_data_rate: 10
+filter_data_rate: 100
 filter_auto_init: True
