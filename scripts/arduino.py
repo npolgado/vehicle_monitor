@@ -2,6 +2,7 @@
 import rospy
 import serial
 from std_msgs.msg import Int64, Int16
+import os
 
 ARDUINO_STOP_BIT = 0xABC
 
@@ -38,7 +39,7 @@ def parse_serial_data(ser):
 
 if __name__ == '__main__':
     try:
-        port = '/dev/ttyACM0'  # Change this to your Arduino's serial port
+        port = os.environ["ARDUINO_PORT"]  # Change this to your Arduino's serial port
         baud_rate = 9600  # Change this to match your Arduino's baud rate
         ser = serial.Serial(port, baud_rate)
         parse_serial_data(ser)

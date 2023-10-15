@@ -10,7 +10,7 @@ Values from Ride Height
 
 // TODO: read these over I2C
 int stop_bit = 0xABC;
-int rate = 10;
+int rate = 10; // in ms
 
 void setup() {
   // Initialize serial communication at a baud rate of 9600

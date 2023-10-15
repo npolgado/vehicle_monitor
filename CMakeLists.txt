@@ -157,8 +157,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   scripts/__init__.py
-  scripts/main.py
-  scripts/test.py
+  scripts/arduino.py
   scripts/determine_ports.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
@@ -187,7 +186,6 @@ catkin_install_python(PROGRAMS
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
   launch/bringup.launch
-  launch/bringup_test.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
