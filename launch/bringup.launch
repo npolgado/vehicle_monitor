@@ -11,6 +11,7 @@
 
   <!-- Set the log level to debug -->
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find microstrain_inertial_driver)/config/custom_rosconsole.conf" if="$(arg debug)" />
+  
   <node name="imu" pkg="microstrain_inertial_driver" type="microstrain_inertial_driver_node" output="screen">
 
     <!-- Load the default params file. -->
