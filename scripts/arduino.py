@@ -9,33 +9,46 @@ ARDUINO_STOP_BIT = 0xABC
 def parse_serial_data(ser):
     rospy.init_node('serial_reader_node', anonymous=True)
     
-    # # Create a dictionary to map wheel names to their corresponding masks
-    # wheel_topics = {
-    #     "front_left": 0xFFF,
-    #     "front_right": 0xFFF000,
-    #     "rear_left": 0xFFF000000,
-    #     "rear_right": 0xFFF000000000,
-    # }
+    # Create 4 topics for each wheel with the namespace "rideheight"
+    pub_fl = rospy.Publisher('rideheight/fl', Int16, queue_size=10)
+    pub_fr = rospy.Publisher('rideheight/fr', Int16, queue_size=10)
+    pub_rl = rospy.Publisher('rideheight/rl', Int16, queue_size=10)
+    pub_rr = rospy.Publisher('rideheight/rr', Int16, queue_size=10)
 
-    # Create publishers for each wheel topic
-    # publishers = {}
-    # for wheel, mask in wheel_topics.items():
-    #     topic_name = "rideheight/" + wheel
-    #     publishers[wheel] = rospy.Publisher(topic_name, Int16, queue_size=10)
+    rate = rospy.Rate(10) # 10hz
 
-    stop_bit_received = False
-    while not rospy.is_shutdown() and not stop_bit_received:
-        data = ser.readLine(8)  # Assuming 8 bytes for Int64 data
-        if len(data) == 8:
-            int64_value = int.from_bytes(data, byteorder='little', signed=True)
-            for wheel, mask in wheel_topics.items():
-                topic_name = "rideheight/" + wheel
-                wheel_value = (int64_value & mask) >> (list(wheel_topics.keys()).index(wheel) * 12)
-                publishers[wheel].publish(wheel_value)
+    data = [
+        0, # fl
+        0, # fr
+        0, # rl
+        0  # rr
+    ] 
+    index = 0
 
-            # Check for a stop condition (e.g., a specific value in the data)
-            if int64_value == ARDUINO_STOP_BIT:
-                stop_bit_received = True
+    while not rospy.is_shutdown():
+        
+        # read in serial data until newline
+        line = int(ser.readline(), 16)
+
+        # check if the stop bit is received
+        if line == ARDUINO_STOP_BIT and index == 3:
+            
+            # send data to topics
+            pub_fl.publish(data[0])
+            pub_fr.publish(data[1])
+            pub_rl.publish(data[2])
+            pub_rr.publish(data[3])
+            
+            # reset
+            # rate.sleep()
+            data = [0, 0, 0, 0]
+            index = 0
+
+        elif index < 3:
+            data[index] = line
+            print(data)
+            index += 1
+            
 
 if __name__ == '__main__':
     try:

@@ -25,10 +25,10 @@ void loop() {
   int analogValueA3 = analogRead(A3);
 
   // Print the values over the serial port
-  Serial.println(analogValueA0);
-  Serial.println(analogValueA1);
-  Serial.println(analogValueA2);
-  Serial.println(analogValueA3);
+  Serial.println(analogValueA0, HEX);
+  Serial.println(analogValueA1, HEX);
+  Serial.println(analogValueA2, HEX);
+  Serial.println(analogValueA3, HEX);
   Serial.println(stop_bit);
 
   // Delay for a short period (you can adjust this value)
