@@ -47,8 +47,7 @@ def parse_serial_data(ser):
         elif index < 3:
             data[index] = line
             print(data)
-            index += 1
-            
+            index += 1            
 
 if __name__ == '__main__':
     try:

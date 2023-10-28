@@ -25,7 +25,9 @@ taking wheel position and pressure data along with IMU data to analyze the C.O.B
 - [x] Parse IMU data (Inertial Sense or LORD)
 - [x] benchmark data throughput
 - [x] ROS bringup launch file
-- [ ] Arduino Ros Driver
+- [x] Arduino Ros Driver
+- [ ] full bringup test (multiple reboots)
+- [ ] test full system w/ data collect
 - [ ] easy to use UI / HMI (display??)
 - [ ] wiring diagram
 - [ ] data analysis code work
