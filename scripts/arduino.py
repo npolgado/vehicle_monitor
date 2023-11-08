@@ -3,8 +3,9 @@ import rospy
 import serial
 from std_msgs.msg import Int64, Int16
 import os
+import time
 
-ARDUINO_STOP_BIT = 0xABC
+ARDUINO_STOP_BIT = 3030
 
 def parse_serial_data(ser):
     rospy.init_node('serial_reader_node', anonymous=True)
@@ -26,13 +27,18 @@ def parse_serial_data(ser):
     index = 0
 
     while not rospy.is_shutdown():
-        
         # read in serial data until newline
-        line = int(ser.readline(), 16)
-
+        try:
+            line = ser.readline()
+            val = int(line)
+        except Exception as e:
+            val = None
+            print(e)
+        
         # check if the stop bit is received
-        if line == ARDUINO_STOP_BIT and index == 3:
-            
+        if val == ARDUINO_STOP_BIT and index > 3:
+            # print("SENDING")
+
             # send data to topics
             pub_fl.publish(data[0])
             pub_fr.publish(data[1])
@@ -44,9 +50,9 @@ def parse_serial_data(ser):
             data = [0, 0, 0, 0]
             index = 0
 
-        elif index < 3:
-            data[index] = line
-            print(data)
+        elif index <= 3:
+            data[index] = val
+            # print(data)
             index += 1            
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ Values from Ride Height
 */ 
 
 // TODO: read these over I2C
-int stop_bit = 0xABC;
+int stop_bit = 3030;
 int rate = 10; // in ms
 
 void setup() {
@@ -24,11 +24,16 @@ void loop() {
   int analogValueA2 = analogRead(A2);
   int analogValueA3 = analogRead(A3);
 
+  // int32_t serializedA = (analogValueA2 << 8) | analogValueA3;
+  // int32_t serializedB = (analogValueA0 << 8) | analogValueA1;
+
   // Print the values over the serial port
-  Serial.println(analogValueA0, HEX);
-  Serial.println(analogValueA1, HEX);
-  Serial.println(analogValueA2, HEX);
-  Serial.println(analogValueA3, HEX);
+  Serial.println(analogValueA0); // , HEX
+  Serial.println(analogValueA1); // , HEX
+  Serial.println(analogValueA2); // , HEX
+  Serial.println(analogValueA3); // , HEX
+  // Serial.println(serializedA);
+  // Serial.println(serializedB);
   Serial.println(stop_bit);
 
   // Delay for a short period (you can adjust this value)

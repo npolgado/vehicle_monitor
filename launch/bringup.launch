@@ -30,5 +30,8 @@
   <!-- ****************************************************************** -->
   <node name="rideheight" pkg="vehicle_monitor" type="arduino.py" output="screen"/>
 
+  <!-- ****************************************************************** -->
+  <!-- Controls node -->
+  <!-- <node name="rideheight" pkg="vehicle_monitor" type="controls.py" output="screen"/> -->
 
 </launch>
