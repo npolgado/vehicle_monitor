@@ -18,7 +18,7 @@
     <rosparam file="$(find microstrain_inertial_driver)/microstrain_inertial_driver_common/config/params.yml" command="load" />
 
     <!-- If you want to override any settings specified in the params.yml file, make a new yaml file, and set the value via the params_file arg -->
-    <rosparam file="$(arg params_file)" command="load" unless="$(eval arg('params_file') == '')" subst_value="true" />
+    <rosparam file="$(arg params_file)" command="load" subst_value="true" />
 
     <!-- Supported overrides -->
     <param name="debug" value="$(arg debug)" type="bool" />

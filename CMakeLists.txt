@@ -158,6 +158,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/__init__.py
   scripts/arduino.py
+  scripts/find_ports.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

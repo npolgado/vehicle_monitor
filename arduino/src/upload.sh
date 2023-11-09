@@ -4,6 +4,8 @@ echo "Uploading to Arduino"
 
 sleep 1
 
+cd /home/ubuntu/catkin_ws/src/vehicle_monitor/arduino/src
+
 arduino-cli compile -b arduino:avr:uno ./adc
 
 echo "compiled! uploading now..."
