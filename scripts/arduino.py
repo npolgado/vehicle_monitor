@@ -57,7 +57,8 @@ def parse_serial_data(ser):
 
 if __name__ == '__main__':
     try:
-        port = os.environ["ARDUINO_PORT"]  # Change this to your Arduino's serial port
+        #port = os.environ["ARDUINO_PORT"]  # Change this to your Arduino's serial port
+        port = "/dev/ttyACM1"
         baud_rate = 9600  # Change this to match your Arduino's baud rate
         ser = serial.Serial(port, baud_rate)
         parse_serial_data(ser)

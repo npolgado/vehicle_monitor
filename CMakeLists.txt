@@ -159,6 +159,7 @@ catkin_install_python(PROGRAMS
   scripts/__init__.py
   scripts/arduino.py
   scripts/find_ports.py
+  scripts/controls.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -186,6 +187,7 @@ catkin_install_python(PROGRAMS
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(FILES
   launch/bringup.launch
+  launch/find_ports.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

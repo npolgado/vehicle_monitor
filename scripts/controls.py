@@ -55,6 +55,9 @@ import yaml
 import signal
 import sys
 
+DATA_PATH = '/media/ubuntu/T7'
+
+
 def log(msg):
     print(f"[CONTROLS]: {msg}")
 
@@ -88,6 +91,16 @@ def parse_ports(ports):
 
     return 0
 
+def check_data_drive():
+    # check if DATA_PATH exists
+    if os.path.exists(DATA_PATH)
+        if os.path.ismount(DATA_PATH):
+            return True
+        else:
+            # need to mount drive
+            return False
+    return False
+
 def launch_data_collection():
     log("launching bringup!")
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
@@ -100,17 +113,17 @@ if __name__ == "__main__":
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(2, GPIO.IN)
 
-    log("Checking arduino-cli (this may take several seconds)...")
-    df = subprocess.check_output(["arduino-cli", "board", "list"])
-    ports = df.decode('utf-8').split("\n")
-    status = parse_ports(ports)
+    # log("Checking arduino-cli (this may take several seconds)...")
+    # df = subprocess.check_output(["arduino-cli", "board", "list"])
+    # ports = df.decode('utf-8').split("\n")
+    # status = parse_ports(ports)
 
-    if status: 
-        launch = launch_data_collection()
-        time.sleep(5)
-    else: 
-        log("no port assignments found :(")
-        raise ValueError
+    # if status: 
+    #     launch = launch_data_collection()
+    #     time.sleep(5)
+    # else: 
+    #     log("no port assignments found :(")
+    #     raise ValueError
 
     switch_state = False
     
@@ -123,8 +136,9 @@ if __name__ == "__main__":
                 # if the switch is flipped ON but previously OFF
                 if not switch and not switch_state: 
                     log("starting to record")
-                    process = subprocess.Popen(['rosbag', 'record', '-a', '-o', '/media/ubuntu/T7/data_collect.bag'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    switch_state = not switch_state
+                    if check_data_drive():
+                        process = subprocess.Popen(['rosbag', 'record', '-a', '-o', '/home/ubuntu/data_collect.bag'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        switch_state = not switch_state
                 
                 # if the switch is flipped OFF but previously ON
                 elif switch and switch_state:
@@ -138,5 +152,4 @@ if __name__ == "__main__":
             time.sleep(1)
             
     except KeyboardInterrupt:
-        launch.shutdown()
         sys.exit()

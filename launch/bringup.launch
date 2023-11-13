@@ -1,28 +1,41 @@
 <?xml version="1.1"?>
 <launch>
+  <!-- Standalone example launch file for 3DM-GX5-25 -->
 
-  <!-- ****************************************************************** -->
-  <!-- Microstrain sensor node -->
-  <!-- ****************************************************************** -->
-  <!-- Declare arguments with default values -->
-  <arg name="namespace"   default = "/"                           doc = "Namespace to use when launching the nodes in this launch file" />
-  <arg name="debug"       default = "false"                       doc = "Whether or not to log debug information." />
-  <arg name="params_file" default = "/home/ubuntu/catkin_ws/src/vehicle_monitor/config/imu.yaml"   doc = "Path to file that will load additional parameters" />
+  <!-- Microstain sensor node -->
+   <node name="microstrain_3dm_gx5_25_node"
+         pkg="microstrain_3dm_gx5_45"
+         type="microstrain_3dm_gx5_25_node"
+         output="screen">
 
-  <!-- Set the log level to debug -->
-  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find microstrain_inertial_driver)/config/custom_rosconsole.conf" if="$(arg debug)" />
-  
-  <node name="imu" pkg="microstrain_inertial_driver" type="microstrain_inertial_driver_node" output="screen">
+      <param name="port" value="/dev/ttyACM0" type="str" />
+      <param name="baudrate" value="115200" type="int" />
+      <param name="device_setup" value="true" type="bool" />
 
-    <!-- Load the default params file. -->
-    <rosparam file="$(find microstrain_inertial_driver)/microstrain_inertial_driver_common/config/params.yml" command="load" />
+      <!-- General Settings -->
+      <param name="readback_settings" value="true" type="bool" />
+      <param name="save_settings" value="true" type="bool" />
+      <param name="tf_ned_to_enu" value="true" type="bool" />
 
-    <!-- If you want to override any settings specified in the params.yml file, make a new yaml file, and set the value via the params_file arg -->
-    <rosparam file="$(arg params_file)" command="load" subst_value="true" />
+      <!-- Additional data settings -->
+      <param name="publish_rpy" value="true" type="bool" />
+      <param name="publish_mag" value="true" type="bool" />
 
-    <!-- Supported overrides -->
-    <param name="debug" value="$(arg debug)" type="bool" />
-  </node>
+      <!-- Complementary Filter Settings-->
+      <param name="publish_cf" value="false" type="bool" />
+      <param name="cf_rate" value="100" type="int" />
+
+      <!-- EKF Settings-->
+      <param name="auto_init" value="true" type="bool" />
+      <param name="imu_frame_id" value="imu_link" type="str" />
+
+      <!-- Declination source 1=None, 2=magnetic, 3=manual -->
+      <param name="declination_source" value="1" type="int" />
+
+      <!--<param name="declination" value="0.23" type="double" />-->
+      <param name="ekf_rate" value="100" type="int" />
+      <param name="dynamics_mode" value="1" type="int" />
+   </node>
 
 
   <!-- ****************************************************************** -->
@@ -32,6 +45,6 @@
 
   <!-- ****************************************************************** -->
   <!-- Controls node -->
-  <!-- <node name="rideheight" pkg="vehicle_monitor" type="controls.py" output="screen"/> -->
-
+  <!-- ****************************************************************** -->
+  <node name="controls" pkg="vehicle_monitor" type="controls.py" output="screen"/>
 </launch>
