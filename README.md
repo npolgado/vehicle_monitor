@@ -8,6 +8,7 @@ taking wheel position and pressure data along with IMU data to analyze the C.O.B
 - [BOM](https://docs.google.com/spreadsheets/d/15MNyfEw0GuSBbplbCHpf8V5PrWQOQE57q0T67NCtYUg/edit?usp=sharing)
 - [IMU driver cpp sample code](https://github.com/ZFDD96/BWT61CL/blob/master/Sample%20Code.zip)
 - [uploading to arduino over raspi](https://github.com/guysoft/OctoPi/issues/23)
+- [lauching ros program on bootup](https://roboticsbackend.com/make-a-raspberry-pi-3-program-start-on-boot/)
 
 # System Overview
 
@@ -26,8 +27,8 @@ taking wheel position and pressure data along with IMU data to analyze the C.O.B
 - [x] benchmark data throughput
 - [x] ROS bringup launch file
 - [x] Arduino Ros Driver
-- [ ] full bringup test (multiple reboots)
-- [ ] test full system w/ data collect
+- [x] full bringup test (multiple reboots)
+- [x] test full system w/ data collect
 - [ ] easy to use UI / HMI (display??)
 - [ ] wiring diagram
 - [ ] data analysis code work

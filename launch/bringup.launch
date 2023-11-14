@@ -1,8 +1,9 @@
 <?xml version="1.1"?>
 <launch>
-  <!-- Standalone example launch file for 3DM-GX5-25 -->
 
-  <!-- Microstain sensor node -->
+   <!-- ****************************************************************** -->
+   <!-- Microstrain sensor node -->
+   <!-- ****************************************************************** -->
    <node name="microstrain_3dm_gx5_25_node"
          pkg="microstrain_3dm_gx5_45"
          type="microstrain_3dm_gx5_25_node"
@@ -31,10 +32,9 @@
 
       <!-- Declination source 1=None, 2=magnetic, 3=manual -->
       <param name="declination_source" value="1" type="int" />
-
       <!--<param name="declination" value="0.23" type="double" />-->
       <param name="ekf_rate" value="100" type="int" />
-      <param name="dynamics_mode" value="1" type="int" />
+      <param name="dynamics_mode" value="2" type="int" />
    </node>
 
 
@@ -47,4 +47,5 @@
   <!-- Controls node -->
   <!-- ****************************************************************** -->
   <node name="controls" pkg="vehicle_monitor" type="controls.py" output="screen"/>
+
 </launch>
