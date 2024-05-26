@@ -2,10 +2,7 @@ import subprocess
 import os
 import time
 import sys
-
-# TODO: this requires a screen to be active for the window...
-import pygame
-pygame.init()
+import keyboard
 
 # TODO: fix FSTAB to mount the drive on boot
 DATA_PATH = '/media/ubuntu/T7'
@@ -19,22 +16,50 @@ def check_data_drive():
     return False
 
 if __name__ == "__main__":
-    switch_state = False
-    display = pygame.display.set_mode((100, 100))
+    # check if the data drive is mounted, if not, throw error, print and exit
+    if not check_data_drive():
+        log("Exiting the program due to data drive not being mounted...")
+        sys.exit(1)
+
+    # params
+    recording = False
+    race_count = 0
+    process = None
+    bag_name = f"race_{race_count}.bag"
+    bag_path = os.path.join(DATA_PATH, bag_name)
+    cmd = f"rosbag record -a -o {bag_path}"
 
     try:
         while True:
+            key_pressed = keyboard.read_key()
+            log(f'Key pressed: {key_pressed}')
 
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    print("A key has been pressed")
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+            # Stop the script when 'esc' is pressed
+            if key_pressed == 'esc':
+                break
+            
+            # if 'a' is pressed, start recording
+            if key_pressed == 'a':
+                if not recording:
+                    process = subprocess.Popen(cmd, shell=True)
+                    recording = True
+                    log(f"Recording started: {bag_name}")
+                else:
+                    log("Recording already in progress")
+            
+            # if 'b' is pressed, stop recording, increment the race_count, and update the bag_name, and bag_path
+            if key_pressed == 'b':
+                if recording:
+                    process.terminate()
+                    recording = False
+                    log(f"Recording stopped: {bag_name}")
+                    race_count += 1
+                    bag_name = f"race_{race_count}.bag"
+                    bag_path = os.path.join(DATA_PATH, bag_name)
+                    cmd = f"rosbag record -a -o {bag_path}"
 
-            display.fill((255, 255, 255))
+    except Exception as e:
+        log(f"Error: {e}")
+        sys.exit(1)
 
-            pygame.display.flip()
-
-    finally: 
-        pygame.quit()
+    finally: pass
