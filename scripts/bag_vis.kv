@@ -1,0 +1,30 @@
+<BagVis>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1, 1
+
+        FileChooserListView:
+            id: fc
+            size_hint: 1, 0.2
+
+        BoxLayout:
+            id: plot_area
+            size_hint: 1, 0.6
+
+        Slider:
+            id: slider
+            size_hint: 1, 0.1
+
+        BoxLayout:
+            id: button_area
+            orientation: 'horizontal'
+            size_hint: 1, 0.1
+            Button:
+                id: start_button
+                text: 'Start'
+            Button:
+                id: stop_button
+                text: 'Stop'
+            Button:
+                id: exit_button
+                text: 'Exit'
